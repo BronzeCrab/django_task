@@ -48,8 +48,6 @@ def all_apps(request):
 def newappointment(request):
     a = Appointment()
     a.doc_name = request.POST['doc_name']
-    print "get doc name"
-    print a.doc_name
     a.visit_date = request.POST['visit_date']
     a.visit_time = request.POST['visit_time']
 
