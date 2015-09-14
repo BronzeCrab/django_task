@@ -32,7 +32,7 @@ git clone https://github.com/BronzeCrab/django_task
 if [[ `echo $?` -eq 0 ]]; then
 	echo "Succesfully cloned repo with project"
 else
-	echo "Something went wrong, django not intalled, check internet connection, aborting"
+	echo "Something went wrong, repo not cloned, check internet connection, aborting"
     exit 1
 fi
 cd django_task
