@@ -1,0 +1,13 @@
+<html>
+<title>Appointments with the doctors</title>
+<body>
+<ul>
+{% for app in appointments %}
+<li><strong>{{ app.client_name }}</strong> will visit doctor
+ <strong>{{ app.doc_name }}</strong> on {{ app.visit_time }} {{ app.visit_date }}</li>
+{% empty %}
+<em>Nobody goes to doctors yet!</em>
+{% endfor %}
+</ul>
+</body>
+</html>

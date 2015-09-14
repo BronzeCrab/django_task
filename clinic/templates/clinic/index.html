@@ -1,0 +1,64 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  {% load staticfiles %}
+  <!-- for time picker -->
+  <script src="{% static "clinic/jquery-2.1.4.min.js" %}"></script>
+  <link rel="stylesheet" href="{% static "clinic/jquery-ui.css" %}">
+  <script src="{% static "clinic/jquery-1.10.2.js" %}"></script>
+  <script src="{% static "clinic/jquery-ui.js" %}"></script>
+  <link rel="stylesheet" href="{% static "clinic/jquery.timepicker.css" %}">
+  <script src="{% static "clinic/jquery.timepicker.js" %}"></script>
+  <script>
+  // datepicker
+  $(function() {
+  	var dateToday = new Date(); 
+    $( "#datepicker" ).datepicker({ beforeShowDay: $.datepicker.noWeekends, dateFormat: "yy-mm-dd", minDate:dateToday });
+  });
+  // timepicker
+  $(document).ready(function(){
+    $('#timepicker').timepicker({ 
+    	timeFormat: 'HH:mm',
+    	minTime: '9:00',
+    	maxTime: '17:00',
+    	interval:60 
+    });
+  });
+  </script>
+ </head>
+<title>Appointment with the doctor</title>
+<body>
+<h2>Want to get appointment with doctor?</h2>
+
+<p>Please specify doc's name, time, date and your full name</p>
+
+<form action="{% url 'newappointment' %}" method="post">
+  {% csrf_token %}
+<!--   <p>Date: <input type="text" id="datepicker"></p> -->
+  {% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {% if field.name == 'visit_date' %}
+        {{ field.label_tag }} <input type="text" name="visit_date" id="datepicker">
+        {% elif field.name == 'visit_time' %}
+        {{ field.label_tag }} <input type="text" name="visit_time" id="timepicker">
+        {% else %}
+        {{ field.label_tag }} {{ field }}
+        {% endif %}
+    </div>
+  {% endfor %}
+<input type="submit" value="Submit" />
+</form>
+{% for message in messages %}
+{% ifequal message.tags 'error' %}
+<div style="color:red">{{ message }}</div>
+{% else %}
+<div style="color:green">{{ message }}</div>
+{% endifequal %}
+{% endfor %}
+</body>
+</html>
+
+
+
