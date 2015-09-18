@@ -42,5 +42,4 @@ else
 	echo "Something went wrong, aborting"
     exit 1
 fi
-cd django_task
 python3 ./manage.py runserver 0.0.0.0:80
